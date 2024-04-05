@@ -1,12 +1,12 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 new file mode 100644
-index 0000000..9867cb9
+index 0000000..d5a74f1
 --- /dev/null
 +++ b/CMakeLists.txt
-@@ -0,0 +1,439 @@
+@@ -0,0 +1,441 @@
 +cmake_minimum_required(VERSION 3.15)
 +
-+project(dav1d VERSION 1.2.0 LANGUAGES C ASM)
++project(dav1d VERSION 1.4.1 LANGUAGES C ASM)
 +
 +include(CheckSymbolExists)
 +check_symbol_exists(_X86_ "Windows.h" _X86_)
@@ -14,11 +14,11 @@ index 0000000..9867cb9
 +check_symbol_exists(_ARM_ "Windows.h" _ARM_)
 +check_symbol_exists(_ARM64_ "Windows.h" _ARM64_)
 +
-+set(DAV1D_API_VERSION_MAJOR 6)
-+set(DAV1D_API_VERSION_MINOR 9)
++set(DAV1D_API_VERSION_MAJOR 7)
++set(DAV1D_API_VERSION_MINOR 0)
 +set(DAV1D_API_VERSION_PATCH 0)
 +
-+set(COPYRIGHT_YEARS 2018-2023)
++set(COPYRIGHT_YEARS 2018-2024)
 +
 +set(PROJECT_VERSION_REVISION ${PROJECT_VERSION_PATCH})
 +set(API_VERSION_MAJOR ${DAV1D_API_VERSION_MAJOR})
@@ -95,6 +95,7 @@ index 0000000..9867cb9
 +    src/mem.c
 +    src/msac.c
 +    src/obu.c
++    src/pal.c
 +    src/picture.c
 +    src/qm.c
 +    src/ref.c
@@ -205,6 +206,7 @@ index 0000000..9867cb9
 +    src/x86/cpuid.asm
 +    src/x86/msac.asm
 +    src/x86/refmvs.asm
++    src/x86/pal.asm
 +    src/x86/itx_avx512.asm
 +    src/x86/cdef_avx2.asm
 +    src/x86/itx_avx2.asm

@@ -30,6 +30,10 @@ jobs:
       # Perl included with git does not work when building openssl
       run: choco install -y StrawberryPerl nasm
 
+    - name: Install CMake v3.28.3
+      # libbluray fails to build with CMake 3.29.0
+      run: choco install -y CMake --version 3.28.3 --force
+
     - name: Build
       # Build your program with the given configuration
       run: .\DoRelease.ps1 -Platforms ${{ matrix.arch }} ${{ matrix.platform }} -VsVersion ${{ env.VS_VERSION }} -SdkVersion "${{ env.SDK_VERSION }}"
