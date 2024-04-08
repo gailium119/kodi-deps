@@ -16,8 +16,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        arch: [win32, x64, arm]
-        platform: [-App, -Desktop]
+        arch: [arm]
+        platform: [-Desktop]
     runs-on: windows-2019
 
     steps:
