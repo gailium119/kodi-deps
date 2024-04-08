@@ -134,7 +134,7 @@ $desktopPackages = $Packages
 $appPackages = [string[]]($Packages | Where-Object { $_ -notin $ExcludedFromUwp })
 
 foreach ($platform in $platforms) {
-  if ($Desktop -and ($platform -ne 'arm')) {
+  if ($Desktop) {
     $path = "$PsScriptRoot\Build\$platform"
     if ($Deb) {
       cmake --build $path --config Debug -t @desktopPackages $cleanFirst --parallel -- -m
@@ -184,7 +184,7 @@ if ($Zip) {
   }
 
   foreach ($platform in $platforms) {
-    if ($Desktop -and ($platform -ne 'arm')) {
+    if ($Desktop) {
       $path = "$PsScriptRoot\Build\$platform"
 
       cmake --build $path --config RelWithDebInfo -t @desktopPackages --parallel -- -m
