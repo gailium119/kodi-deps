@@ -306,8 +306,8 @@ ExternalProject_Add(libcdio
 add_dependency_project_package(libcdio 2.1.0)
 
 ExternalProject_Add(libfribidi
-    GIT_REPOSITORY https://github.com/Paxxi/fribidi
-    GIT_TAG 15ff2bd79faf8d246eac7ea27b89393d1b905c8b
+    GIT_REPOSITORY https://github.com/gailium119/fribidi
+    GIT_TAG 3cb880dd60349af3e6042f24c9e9ddb7f3eccb2c
     GIT_SHALLOW ON
     CMAKE_ARGS
         ${ADDITIONAL_ARGS}
