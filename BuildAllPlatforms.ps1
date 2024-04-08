@@ -113,7 +113,7 @@ $ExcludedFromUwp = @(
 
 if ($GenerateProjects) {
   foreach ($platform in $platforms) {
-    if ($Desktop -and ($platform -ne 'arm')) {
+    if ($Desktop) {
       $path = "$PsScriptRoot\Build\$platform"
       cmake -G "Visual Studio $VsVersion" -A $platform -Thost=x64 -DPATCH="C:\Program Files\Git\usr\bin\patch.exe" -S $PsScriptRoot -B $path
     }
