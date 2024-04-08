@@ -18,9 +18,6 @@ jobs:
       matrix:
         arch: [win32, x64, arm]
         platform: [-App, -Desktop]
-        exclude:
-          - arch: arm
-            platform: -Desktop
     runs-on: windows-2019
 
     steps:
