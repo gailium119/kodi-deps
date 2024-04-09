@@ -158,7 +158,26 @@
 +
 +# BD-J
 +
-+if(NOT WINDOWS_STORE)
++# Get the Arch
++include(CheckSymbolExists)
++
++check_symbol_exists(_X86_ "Windows.h" _X86_)
++check_symbol_exists(_AMD64_ "Windows.h" _AMD64_)
++check_symbol_exists(_ARM_ "Windows.h" _ARM_)
++check_symbol_exists(_ARM64_ "Windows.h" _ARM64_)
++
++if(_X86_)
++   set(ARCH win32)
++elseif(_AMD64_)
++   set(ARCH x64)
++elseif(_ARM_)
++   set(ARCH arm)
++elseif(_ARM64_)
++   set(ARCH arm64)
++else()
++   set(ARCH unknown)
++endif()
++if(NOT WINDOWS_STORE AND NOT ARCH MATCHES "arm|arm64")
 +  find_package(JNI)
 +  if (JNI_FOUND)
 +    include_directories("${JAVA_INCLUDE_PATH}")
@@ -176,7 +195,7 @@
 +  else()
 +    message( FATAL_ERROR "JNI not found." )
 +  endif()
-+endif(NOT WINDOWS_STORE)
++endif(NOT WINDOWS_STORE AND NOT ARCH MATCHES "arm|arm64")
 +
 +add_library(libbluray SHARED ${SRCS})
 +target_link_libraries(libbluray PRIVATE freetype::freetype iconv::iconv libxml2::libxml2 libudfread::libudfread)
@@ -233,7 +252,7 @@
 +    )
 +    add_dependencies(libbluray ANT)
 +  else()
-+    message( FATAL_ERROR "ANT path not set, can't compile libbluray.jar")
++    message("ANT path not set, can't compile libbluray.jar")
 +  endif()
 +endif(NOT WINDOWS_STORE)
 +
@@ -270,12 +289,12 @@
 +  DESTINATION lib
 +)
 +
-+if(NOT WINDOWS_STORE)
++if(NOT WINDOWS_STORE AND NOT ARCH MATCHES "arm|arm64")
 +  install(FILES
 +    ${CMAKE_CURRENT_BINARY_DIR}/libbluray-j2se-${libbluray_VERSION}.jar
 +    ${CMAKE_CURRENT_BINARY_DIR}/libbluray-awt-j2se-${libbluray_VERSION}.jar
 +    DESTINATION bin)
-+endif(NOT WINDOWS_STORE)
++endif(NOT WINDOWS_STORE AND NOT ARCH MATCHES "arm|arm64")
 +
 +install(EXPORT libbluray
 +  FILE
